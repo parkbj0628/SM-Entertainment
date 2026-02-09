@@ -1,0 +1,150 @@
+@charset "UTF-8";
+:root {
+  --sm-pink: #FFE1E9;
+  --sm-dark-pink: #FFB7CA;
+  --sm-blue: #223055;
+  --sm-padding-xl:60px;
+  --sm-padding-l:40px;
+  --sm-padding-m:30px;
+  --sm-padding-s:24px;
+}
+
+@font-face {
+  font-family: 'SMTOWN';
+  src: url('../font/smtown-regular.woff') format('woff');
+  font-weight: 400;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SMTOWN';
+  src: url('../font/smtown-medium.woff') format('woff');
+  font-weight: 500;
+  font-style: normal;
+}
+@font-face {
+  font-family: 'SMTOWN';
+  src: url('../font/smtown-bold.woff') format('woff');
+  font-weight: 700;
+  font-style: normal;
+}
+
+body { font-family: 'SMTOWN', sans-serif; color:#3f3f3f; font-size: 15px; line-height: 1.43; }
+body.home { color:#fff; background: var(--sm-blue); }
+
+.home header { background: var(--sm-blue); }
+header { position: fixed; width: 100%; left: 0; top: 0; padding: 0 var(--sm-padding-xl); z-index: 100; border-bottom: 3px solid transparent; height: 120px;
+  transition: height 0.7s ease-out, border-color 0.3s ease-out; overflow: hidden; }
+
+.header-content { display: flex; justify-content: space-between; align-items: center; height: 120px; width: 100%; }
+
+.logo { width:80px; }
+.logo a { display: block; width: 100%; }
+.logo svg { display: block; width: 100%; height: auto; }
+
+.site-menu { width: 70%; }
+.menu { display: flex; justify-content: space-between;} 
+.menu > li.item { position: relative;  }
+.menu > li.item > a { display: inline-block; position: relative; padding:6px 12px; border-radius: 30px; transition: 0.2s ease-out; }
+.menu > li.item:hover > a { background:rgba(255,255,255,0.3)}
+
+.menu li.item > a[targer="_blank"]  { padding-right: 24px;}
+.menu li.item a[targer="_blank"]:after { position: absolute; content: ""; 
+  width: 20px; height: 20px; top:50%; right:8px; transform: translate3d(0,-50%,0);
+  background: url(../img/icon-external-link-alt.svg);
+}
+
+.sub a { display: inline-block; font-size: 0.85rem; padding: 4px 8px; transition: 0.2s ease-out; position: relative; }
+  
+
+  @media (min-width:1201px){
+    .sub { position: absolute; top:40px; min-width: 220px; left:-12px; padding:30px 8px; opacity:0; }
+    .sub li.item { }
+    
+    .sub a:hover { transform: translate3d(4px, 0, 0);}
+
+    .menu li.item:hover .sub { opacity:1; top:20px; transition: 0.2s ease-out; } 
+
+    header:hover { border-bottom-color: #586274; }
+}
+
+
+
+.hamburger { 
+  display: none;
+  position: fixed; width: 50px; height: 40px;
+  top:30px; right:40px;  z-index: 1000;
+}
+.hamburger .bun {
+  display: inline-block; width: 100%; height: 10 0%;  
+}
+.hamburger .patty, .hamburger .patty::after, .hamburger .patty::before {
+  position: absolute; width: 100%; height: 1.5px;
+  transition: 0.5s;
+
+}
+.hamburger .patty { 
+  background: yellow;
+  top:50%;
+  transition: transform 0.3s ease, background-color 0.3s ease
+}
+
+.hamburger .patty::after, .hamburger .patty::before { 
+  content: "";
+  background: #000;
+}
+.hamburger .patty::before { 
+  top:-6px; background: lightgreen;  
+  transition: top 0.1s 0.15s ease, opacity 0.1s ease-out; 
+}
+.hamburger .patty::after { 
+  bottom:-6px; background: pink; 
+  transition: bottom 0.1s ease, transform 0.1s 0.15s ease-out
+}
+
+body[class *= "-opened"] .patty { 
+  transform: rotate(45deg);
+  transition-delay: 0.5s;
+}
+
+body[class *= "-opened"] .patty::before { /* *=  속성 선택자에서 값이 특정 문자열을 포함 */
+  top:0; opacity: 0; ;
+}
+body[class *= "-opened"] .patty::after  {  
+  bottom:0;
+  transform: rotate(-90deg);
+}
+
+@media (max-width:1200px) {  
+  :root {
+    --sm-padding-xl:40px;
+    --sm-padding-l:30px;
+    --sm-padding-m:30px;
+    --sm-padding-s:20px;
+  }
+
+
+  header { height: 100px;}
+  .hamburger { display: block; }
+  .logo { width: 60px; }
+
+  .site-menu {  
+    display: none;  
+    position: fixed; top:0; left:0; width: 100%; height: 100%; z-index: 999;
+    padding: calc(100px + var(--sm-padding-xl)) var(--sm-padding-xl) var(--sm-padding-xl); background: var(--sm-blue);
+  }
+  .menu-opened .site-menu { display: block;}
+
+  .menu { display: flex; flex-wrap: wrap;} 
+  .menu > li.item { width: 50%; margin-bottom: 24px; }
+  .menu > li.item > a { font-size: 30px; font-weight: 500; border-radius:0; padding:3px 3px; }
+
+  .sub { margin-top: 8px; }
+  .sub li.item + li { margin-top: 5px;}
+}
+
+
+@media ( max-width:781px){
+  header:hover { border-bottom:none; }
+  .menu > li.item > a { font-size: 20px; }
+  .sub a { font-size: 14px; }
+}
